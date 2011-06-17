@@ -25,7 +25,7 @@ under the License.
     </target>
 
     <target name="init">
-        <property file="${basedir}/src/ant/VERSION.properties"/>
+        <property file="${basedir}/src/ant/build-version.properties"/>
         <!-- sets project.name and version.number -->
         <tstamp>
             <format property="build.time" pattern="yyyy.MM.dd-hh.mm" locale="en,US"/>
