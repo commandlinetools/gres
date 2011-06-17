@@ -3,6 +3,6 @@
 .pjm/*
 build/*
 dist/*
-ivy/*
 lib/*
-
+tmp/*
+*.iml

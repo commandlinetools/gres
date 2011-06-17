@@ -1,2 +1,0 @@
-project.name=gres
-version.number=0.1

@@ -1,4 +1,5 @@
-<!--
+<!-- gres/src/ant/build.xml
+
    (c) Copyright 2011 Michael A. Wright.  All Rights Reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,29 +16,23 @@
    under the License.    
 
 -->
-<project name="gres" default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
-  <!-- 
-
+<project name="gres" default="all" basedir="../../">
+  <!--
    To build gres requires both ant 1.8 (or higher) and Java 5 (or higher)
-   already be installed.  This script calls dependencies.ant, which uses
-   ivy.xml, to install ivy and download gres dependencies.
-
+   already be installed.
   -->
-  <property file="build.properties"/>
+  <property file="${basedir}/src/ant/build.properties"/>
   
   <target name="all" description="builds and tests gres">
-    
-    <ant antfile="dependencies.ant" />
-
-    <ant antfile="gres.ant" />
-
+    <ant antfile="${basedir}/src/ant/build-gres.ant" />
   </target>
 
   <target name="clean" description="removes build artifacts">
     <delete includeemptydirs="true" quiet="true">
       <fileset dir="${build.dir}" />
-      <fileset dir="${dist.dir}" />
+      <fileset dir="${tmp.dir}" />
     </delete>
   </target>
 
 </project>
+
