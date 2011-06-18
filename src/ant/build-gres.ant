@@ -20,8 +20,8 @@ under the License.
 
     <property file="${basedir}/src/ant/build.properties"/>
 
-    <target name="all" depends="passed,failed"
-            description="tests gres">
+    <target name="all" depends="build-tests"
+            description="builds gres">
     </target>
 
     <target name="init">
@@ -34,37 +34,11 @@ under the License.
     </target>
 
     <target name="build-tests" depends="init">
+        <copydir dest="${basedir}/tmp/bad-suite1" src="${basedir}/test/ant/bad-suite1"/>
         <copydir dest="${basedir}/tmp/suite1" src="${basedir}/test/ant/suite1"/>
     </target>
 
-    <target name="test" depends="build-tests"
-            description="tests gres">
-        <ant antfile="${basedir}/test/ant/suite1/test1-gres-subject.ant"
-             output="${basedir}/tmp/suite1/test1-gres-actual.txt"/>
 
-        <condition property="gres.passed">
-            <and>
-                <filesmatch file1="${basedir}/tmp/suite1/test1-gres-expected.txt"
-                            file2="${basedir}/tmp/suite1/test1-gres-actual.txt"/>
-            </and>
-        </condition>
-    </target>
-
-    <target name="passed" depends="test" if="gres.passed">
-        <echo>Passed</echo>
-    </target>
-
-    <target name="failed" depends="test" unless="gres.passed">
-        <echo>_Expected_</echo>
-        <concat>
-            <fileset dir="${basedir}/tmp/suite1" includes="*gres-expected*"/>
-        </concat>
-        <echo>_Actual_</echo>
-        <concat>
-            <fileset dir="${basedir}/tmp/suite1" includes="*gres-actual*"/>
-        </concat>
-        <fail message="failed"/>
-    </target>
 
 </project>
 
