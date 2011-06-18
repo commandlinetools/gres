@@ -1,4 +1,4 @@
-<!-- gres/test/ant/suite1/test1-gres-subject.ant
+<!-- gres/test/ant/bad-suite1/bad-test1-gres-subject.ant
 
    (c) Copyright 2011 Michael A. Wright.  All Rights Reserved.
 
@@ -18,6 +18,6 @@
 -->
 <project name="test1" default="test">
     <target name="test" description="simple positive test">
-        <echo message="test1" />
+        <echo message="bad test1 (with some unexpected output)" />
     </target>
 </project>

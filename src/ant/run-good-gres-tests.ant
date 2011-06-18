@@ -1,0 +1,54 @@
+<!-- gres/src/ant/run-good-gres-tests.ant
+
+   (c) Copyright 2011 Michael A. Wright.  All Rights Reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+
+-->
+<project name="run-good-gres-tests" default="all" basedir="../..">
+
+    <target name="all" depends="passed,failed"
+            description="runs and reports on good gres tests">
+    </target>
+
+    <target name="test" description="runs good gres tests">
+        <ant antfile="${basedir}/test/ant/suite1/test1-gres-subject.ant"
+             output="${basedir}/tmp/suite1/test1-gres-actual.txt"/>
+
+        <condition property="gres.passed">
+            <and>
+                <filesmatch file1="${basedir}/tmp/suite1/test1-gres-expected.txt"
+                            file2="${basedir}/tmp/suite1/test1-gres-actual.txt"/>
+            </and>
+        </condition>
+    </target>
+
+    <target name="passed" depends="test" if="gres.passed">
+        <echo>Run good gres tests: Passed</echo>
+    </target>
+
+    <target name="failed" depends="test" unless="gres.passed">
+        <echo>_Expected_</echo>
+        <concat>
+            <fileset dir="${basedir}/tmp/suite1" includes="*gres-expected*"/>
+        </concat>
+        <echo>_Actual_</echo>
+        <concat>
+            <fileset dir="${basedir}/tmp/suite1" includes="*gres-actual*"/>
+        </concat>
+        <echo>Run good gres tests: Failed</echo>
+        <fail message="expected and actual outputs are different"/>
+    </target>
+
+</project>
