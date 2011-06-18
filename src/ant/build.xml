@@ -25,6 +25,8 @@
   
   <target name="all" description="builds and tests gres">
     <ant antfile="${basedir}/src/ant/build-gres.ant" />
+    <ant antfile="${basedir}/src/ant/run-bad-gres-tests.ant" />
+    <ant antfile="${basedir}/src/ant/run-good-gres-tests.ant" />
   </target>
 
   <target name="clean" description="removes build artifacts">

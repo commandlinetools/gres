@@ -1,0 +1,3 @@
+
+test:
+     [echo] bad test1 (missing stuff)
